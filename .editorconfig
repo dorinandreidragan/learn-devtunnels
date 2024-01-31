@@ -1,0 +1,15 @@
+# add rules for markdown files
+root = true
+
+# add rules for all files
+# these rules should set indentation with spaces, not tabs
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+max_line_length = 100
