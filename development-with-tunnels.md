@@ -1,185 +1,181 @@
-# Development with Remote Tunnels
+# Development with VSCode Remote Tunnels
 
-This document describes how to use the [Remote Tunnels][remote-tunnels] feature of VSCode to connect
-from a local VSCode Desktop or VSCode online to a remote machine, WSL2 instance, or even a Docker
-container.
+Discover the flexibility of [VSCode Remote Tunnels][remote-tunnels], enabling work on remote
+machines, WSL2 instances, or Docker containers, not just through VSCode Desktop but also via web
+browsers.
 
-The benefits of using this feature are:
-- You don't need to open any ports, use any VPN, RDP, or configure any SSH tunnel in order to work
-  on your remote machine.
-- You can run **whatever you want** on your remote machine, **from your browser** or from VSCode
-  Desktop.
+Let's delve into two scenarios:
 
-In order to do that, you first need to have a Microsoft or a GitHub account. In this document, I am
-using a Microsoft account.
+**Scenario 1**: Quantum Leap 🌌
 
-Let's see how to do it for each of the following cases:
+Ever faced the frustration of working on a machine seemingly light-years away? The hassle of
+installing a VPN client and navigating an RDP disrupts your workflow. With [VSCode Remote
+Tunnels][remote-tunnels], you can run VSCode Desktop on that distant machine without cluttering your
+own.
 
-- [Remote machine in your network](#remote-machine-in-your-network)
-- [WSL2 Instance](#wsl2-instance)
-- [Docker container](#docker-container)
+**Scenario 2**: Mobile Marvels 📲
 
-## Remote machine in your network
+Imagine being far from your laptop when an urgent task arises that demands your machine. Stress
+levels rising? No worries! Utilize [VSCode Remote Tunnels][remote-tunnels] to efficiently handle
+tasks from your tablet or smartphone.
 
-### Setting up the remote machine
+To embark on this journey, ensure you have a Microsoft or GitHub account. Follow the steps to work
+remotely on:
 
-#### Step 1 - Install `code CLI`
+- Remote machine 🌐
+- WSL2 Instance 🚧
+- Docker container 🐋
 
-If you have VSCode installed, you should already have `code CLI` installed. However, if your remote
-doesn't have VSCode installed, or if it doesn't have a UI, you can install it by it through a
-[standalone install].
+## Remote Machine 🌐
 
-#### Step 2 - Turn on Remote Tunnel Access
+### Step 1 - Install code CLI
 
-> **Note:** You can do this step also from the VSCode UI on the remote machine by using the Remote
-> Tunnels extension. However, I prefer to do it from the command line.
+Ensure the code CLI is installed. If VSCode is absent on the remote machine or lacks a UI, perform a
+standalone install.
 
-> :warning: There are some limitations for how many tunnels you can create per account and how much
-> data you can transfer. See [Are there usage limits for the tunneling service?][usage-limits] for
-> more information.
+### Step 2 - Enable Remote Tunnel Access
 
-- Login to your Microsoft account:
+Preferably through the command line, log in to your Microsoft account:
 
-  ```bash
-  code tunnel user login --provider microsoft
-  ```
+```bash
+code tunnel user login --provider microsoft
+```
 
-- Start the tunnel:
+Initiate the tunnel:
 
-  ```bash
-  code tunnel service install --accept-server-license-terms --name "remote-tunnel"
-  ```
+```bash
+code tunnel service install --accept-server-license-terms --name "remote-tunnel"
+```
 
-### Connect to the remote machine
+### Step 3 - Connect to Remote Machine
 
-#### Step 1 - Connect with your browser
-
-> **Note:** Connecting with your browser proves that you can basically work from anywhere and from
-> any device, even from your phone.
+#### Step 3a - Browser Connection
 
 - Open [vscode.dev] in your browser.
-- Type `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`
-- Choose `Microsoft Account` and login with the same account you used in Step 2.
-- Now you should see a list of code tunnels you can connect to. Choose the one you created in Step
-  2.
+- Press `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`.
+- Choose Microsoft Account and log in.
+- Select the desired code tunnel created in [Step 2](#step-2-install-code-cli).
 
-Enjoy running **whatever you want** on your remote machine, **from your browser**.
-- Try whatever terminal you want.
-- Try even `vim`, `tmux` or `screen`.
-- Try SSH to other machines in your network.
+Enjoy seamless operation on your remote machine through the browser, including terminal access and
+running various commands like vim, tmux, or screen.
 
-#### Step 2 - Connect with VSCode Desktop
+#### Step 3b - VSCode Desktop Connection
 
-> **Note:** You have to install the Remote Tunnels extension in VSCode Desktop.
-
+- Install the Remote Tunnels extension in VSCode Desktop.
 - Open VSCode Desktop.
-- Type `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`
-- Choose `Microsoft Account` and login with the same account you used in Step 2.
-- Now you should see a list of code tunnels you can connect to. Choose the one you created in Step
-  2.
+- Press `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`.
+- Choose Microsoft Account and log in.
+- Select the code tunnel created in [Step 2](#step-2-install-code-cli).
 
-Enjoy running **whatever you want** on your remote machine, **from VSCode Desktop**.
+Now, run applications on your remote machine directly from VSCode Desktop.
 
-## WSL2 Instance
+## WSL2 Instance 🚧
 
-### Setting up the WSL2 Instance
+For a WSL2 instance, follow these steps:
 
-#### Step 1 - Enable `systemd`
+### Step 1 - Enable systemd
 
-We want `systemd` to be enabled so that we can start the code tunnel as a service. To enable it,
-edit the `/etc/wsl.conf` file and add the following lines:
+Edit `/etc/wsl.conf` and add:
 
 ```bash
 [boot]
 systemd=true
 ```
 
-See [Systemd support is now available in WSL][systemd-in-wsl] for more information.
+Refer to [Systemd support is now available in WSL][systemd-in-wsl] for details.
 
-#### Step 2 - Install `code CLI`
+### Step 2 - Install code CLI on WSL2
 
-Do the same as in Step 1 of [Remote machine in your network](#remote-machine-in-your-network).
+Same as [Step 1 from Remote Machine](#step-1-install-code-cli).
 
-### Step 3 - Turn on Remote Tunnel Access
+### Step 3 - Enable Remote Tunnel Access on WSL2
 
-Do the same as in Step 2 of [Remote machine in your network](#remote-machine-in-your-network).
+Same as [Step 2 from Remote Machine](#step-2-enable-remote-tunnel-access).
 
-### Connect to the remote WSL2
+### Step 4 - Connect to WSL2 Instance
 
-Now you can connect to the remote WSL2 instance from your browser or from VSCode Desktop, exactly in
-the same way as you connect to a remote machine in your network.
+Connect to the remote WSL2 instance through your browser or VSCode Desktop as you would with a
+regular remote machine.
 
-## Docker container
+## Docker Container 🐋
 
-### Setting up the Docker container
+[VSCode Remote Tunnels][remote-tunnels] also support containers with a slightly different setup.
 
-#### Step 1 - Build the Docker image
+### Step 1 - Build Docker Image
 
-- In order to connect to a remote tunnel from a Docker container, you need to have `code CLI`
-  installed in the container. The `Dockerfile` below is a good starting point for building such an
-  image.
+To connect to a remote tunnel from a Docker container, create a Docker image with the code CLI.
+Below is a Dockerfile example:
 
-  ```Dockerfile
-  FROM ubuntu:22.04
+```Dockerfile
+FROM ubuntu:22.04
 
-  # Install git and curl
-  RUN apt-get update && \
-      apt-get install -y git curl && \
-      apt-get clean && \
-      rm -rf /var/lib/apt/lists/*
+# Install git and curl
+RUN apt-get update && \
+    apt-get install -y git curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-  # Download and extract the code cli program
-  RUN curl -sL "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64" \
+# Download and extract the code cli program
+RUN curl -sL "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64" \
       --output /tmp/vscode-cli.tar.gz && \
       tar -xf /tmp/vscode-cli.tar.gz -C /usr/bin && \
       rm /tmp/vscode-cli.tar.gz
 
-  # Keep the container running
-  CMD [ "tail", "-f", "/dev/null" ]
-  ```
+# Keep the container running
+CMD [ "tail", "-f", "/dev/null" ]
+```
 
-- Run this command to build the image:
+Build the image:
 
-  ```bash
-  docker build -t vscode-remote-tunnel .
-  ```
-#### Step 2 - Turn on Remote Tunnel Access
+```bash
+docker build -t vscode-remote-tunnel .
+```
 
-- Start the container with the following command:
+### Step 2 - Enable Remote Tunnel Access
 
-  ```bash
-  docker run -d \
-      -v $(pwd):/home/workspace \
-      -w /home/workspace \
-      --name vscode-remote-tunnel \
-      vscode-remote-tunnel
-  ```
+Start the container:
 
-- Login to your Microsoft account:
+```bash
+docker run -d \
+    -v $(pwd):/home/workspace \
+    -w /home/workspace \
+    --name vscode-remote-tunnel \
+    vscode-remote-tunnel
+```
 
-  ```bash
-  docker exec vscode-remote-tunnel code tunnel user login --provider microsoft
-  ```
+Log in to your Microsoft account:
 
-- Start the tunnel:
+```bash
+docker exec vscode-remote-tunnel code tunnel user login --provider microsoft
+```
 
-  ```bash
-  docker exec -d vscode-remote-tunnel code tunnel --accept-server-license-terms --name "docker-tunnel"
-  ```
+Start the tunnel:
 
-### Connect to the remote Docker container
+```bash
+docker exec -d vscode-remote-tunnel code tunnel --accept-server-license-terms --name "docker-tunnel"
+```
 
-Now you can connect to the remote Docker container from your browser or from VSCode Desktop, exactly
-in the same way as you connect to a remote machine in your network.
+### Step 3 - Connect to Docker Container
 
-### Stopping the tunnel
+Connect to the remote Docker container through a browser or VSCode Desktop, similar to connecting to
+a remote machine.
 
-- Make sure you stop the server for the tunnel and logout from your Microsoft account:
+## Terminate the Tunnel
 
-  ```bash
-  docker exec vscode-remote-tunnel code tunnel kill
-  docker exec vscode-remote-tunnel code tunnel user logout
-  ```
+Ensure to stop the server for the tunnel and log out from your Microsoft account when done. For the
+Docker container:
+
+```bash
+docker exec vscode-remote-tunnel code tunnel kill
+docker exec vscode-remote-tunnel code tunnel user logout
+```
+
+Follow a similar process for remote machines or WSL2 instances:
+
+```bash
+code tunnel kill
+code tunnel user logout
+```
 
 ## References
 
