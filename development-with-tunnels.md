@@ -31,7 +31,7 @@ remotely on:
 ### Step 1 - Install code CLI
 
 Ensure the code CLI is installed. If VSCode is absent on the remote machine or lacks a UI, perform a
-standalone install.
+[standalone install].
 
 ### Step 2 - Enable Remote Tunnel Access
 
@@ -54,7 +54,7 @@ code tunnel service install --accept-server-license-terms --name "remote-tunnel"
 - Open [vscode.dev] in your browser.
 - Press `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`.
 - Choose Microsoft Account and log in.
-- Select the desired code tunnel created in [Step 2](#step-2-install-code-cli).
+- Select the desired code tunnel created in [Step 2](#step-2---enable-remote-tunnel-access)
 
 Enjoy seamless operation on your remote machine through the browser, including terminal access and
 running various commands like vim, tmux, or screen.
@@ -65,7 +65,7 @@ running various commands like vim, tmux, or screen.
 - Open VSCode Desktop.
 - Press `Ctrl+Shift+P` and select `Remote-Tunnels: Connect to Tunnel...`.
 - Choose Microsoft Account and log in.
-- Select the code tunnel created in [Step 2](#step-2-install-code-cli).
+- Select the code tunnel created in [Step 2](#step-2---enable-remote-tunnel-access).
 
 Now, run applications on your remote machine directly from VSCode Desktop.
 
@@ -86,11 +86,11 @@ Refer to [Systemd support is now available in WSL][systemd-in-wsl] for details.
 
 ### Step 2 - Install code CLI on WSL2
 
-Same as [Step 1 from Remote Machine](#step-1-install-code-cli).
+Same as [Step 1 from Remote Machine](#step-1---install-code-cli).
 
 ### Step 3 - Enable Remote Tunnel Access on WSL2
 
-Same as [Step 2 from Remote Machine](#step-2-enable-remote-tunnel-access).
+Same as [Step 2 from Remote Machine](#step-2---enable-remote-tunnel-access).
 
 ### Step 4 - Connect to WSL2 Instance
 
